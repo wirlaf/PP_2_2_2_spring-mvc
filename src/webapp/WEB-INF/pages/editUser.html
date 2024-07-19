@@ -11,7 +11,7 @@
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" th:value="${user.name}" required>
     <label for="lastname">Фамилия пользователя:</label>
-    <input type="text" id="lastname" name="lastname" required>
+    <input type="text" id="lastname" name="lastname" th:value="${user.lastname}" required>
     <button type="submit">Save</button>
 </form>
 <form action="/deleteUser" method="post">
