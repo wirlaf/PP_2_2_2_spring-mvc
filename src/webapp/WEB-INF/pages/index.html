@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:encoding="UTF-8">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,9 +7,16 @@
 </head>
 <body>
 <div>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"></h1>
+    <th:block th:if="${emptyList}">
+        <h1>Список пользователей пуст</h1>
+        <a href="/addUser">Добавить пользователя</a>
+    </th:block>
+    <th:block th:if="${not #lists.isEmpty(userList)}">
+        <div th:each="user : ${userList}">
+            <h1 th:text="${user.name}"></h1>
+        </div>
+        <a href="/addUser">Добавить пользователя</a>
     </th:block>
 </div>
 </body>
-</html>
+</html></html>
