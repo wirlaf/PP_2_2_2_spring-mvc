@@ -2,7 +2,6 @@ package web.config.UserDao;
 
 
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import web.User.User;
@@ -18,7 +17,7 @@ public class UserDao  {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<User> index() {
+    public  List<User> index() {
         List<User> userList = new ArrayList<>();
         String sql = "SELECT * FROM user";
         Query query = entityManager.createNativeQuery(sql, User.class);
@@ -33,4 +32,21 @@ public class UserDao  {
             System.out.println("Error adding user: " + e.getMessage());
         }
     }
+    @Transactional
+    public void updateUser(User updatedUser) {
+        try {
+            entityManager.merge(updatedUser);
+        } catch (Exception e) {
+            System.out.println("Error updating user: " + e.getMessage());
+        }
+    }
+    @Transactional
+    public User getUserById(Long id) {
+        return entityManager.find(User.class, id);
+    }
+  @Transactional
+    public void deleteUser(Long id){
+        User user = entityManager.find(User.class, id);
+        entityManager.remove(user);
+  }
 }

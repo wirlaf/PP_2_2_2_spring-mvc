@@ -46,6 +46,9 @@ public class AppConfig {
         em.setJpaVendorAdapter(vendorAdapter);
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.connection.characterEncoding", "UTF-8");
+        properties.setProperty("hibernate.connection.useUnicode", "true");
+        properties.setProperty("hibernate.connection.charSet", "UTF-8");
         em.setJpaProperties(properties);
         return em;
     }

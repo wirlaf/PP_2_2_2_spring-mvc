@@ -5,22 +5,25 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import web.config.UserDao.UserDao;
+import org.springframework.web.bind.annotation.RequestParam;
+import web.config.UserService.UserService;
+;
 import web.User.User;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Controller
 public class HelloController {
-	private final UserDao userDao;
+	private final UserService userService;
 
-	public HelloController(UserDao userDao) {
-		this.userDao = userDao;
+	public HelloController(UserService userService) {
+		this.userService = userService;
+
 	}
 
 	@GetMapping(value = "/")
 	public String printWelcome(ModelMap model) {
-		List<User> userList = userDao.index();
+		List<User> userList = userService.getAllUsers();
 
 		if(userList.isEmpty()) {
 			model.addAttribute("emptyList", true);
@@ -37,8 +40,25 @@ public class HelloController {
 	}
 	@PostMapping(value = "/addUser")
 	public String addUserSubmit(User user, Model model) {
-		userDao.addUser(user);
-		model.addAttribute("message", "Пользователь успешно добавлен");
+		userService.addUser(user);
+		model.addAttribute("message", "Добавлен");
 		return "redirect:/";
 }
+	@GetMapping(value = "/editUser")
+	public String editUserForm(@RequestParam Long id, Model model) {
+		User user = userService.getUserById(id);
+		model.addAttribute("user", user);
+		return "editUser";
+}
+	@PostMapping(value = "/editUser")
+	public String editUserSubmit(User user) {
+		userService.updateUser(user);
+		return "redirect:/";
+	}
+	@PostMapping("/deleteUser")
+	public String deleteUser(@RequestParam Long id, Model model) {
+		userService.deleteUser(id);
+		model.addAttribute("message", "Пользователь успешно удален");
+		return "redirect:/";
+	}
 }

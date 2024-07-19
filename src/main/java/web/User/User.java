@@ -11,6 +11,16 @@ public class User {
     private Long id;
     @Column(name = "name")
     private String name;
+    @Column(name = "lastname")
+    private String lastname;
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
     public User(String firstName) {
         this.name = firstName;
