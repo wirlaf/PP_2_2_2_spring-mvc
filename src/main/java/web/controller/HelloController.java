@@ -6,7 +6,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import web.config.UserService.UserService;
+import web.UserService.UserService;
+import web.UserService.UserServiceimpl;
 ;
 import web.User.User;
 
@@ -23,7 +24,7 @@ public class HelloController {
 
 	@GetMapping(value = "/")
 	public String printWelcome(ModelMap model) {
-		List<User> userList = userService.getAllUsers();
+		List<User> userList = userService.index();
 
 		if(userList.isEmpty()) {
 			model.addAttribute("emptyList", true);

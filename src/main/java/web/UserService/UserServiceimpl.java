@@ -1,24 +1,29 @@
-package web.config.UserService;
+package web.UserService;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.User.User;
-import web.config.UserDao.UserDao;
+import web.UserDao.UserDao;
 
 import java.util.List;
 @Service
-public class UserService extends UserDao {
+public class UserServiceimpl implements UserService {
 
-    private final UserDao userDao;
+private final UserDao userDao;
 
-    @Autowired
-    public UserService(UserDao userDao) {
+    public UserServiceimpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
+
     @Transactional
     public List<User> getAllUsers() {
+        return userDao.index();
+    }
+
+    @Override
+    public List<User> index() {
         return userDao.index();
     }
 

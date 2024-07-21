@@ -1,4 +1,4 @@
-package web.config.UserDao;
+package web.UserDao;
 
 
 
@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserDao  {
+public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
-
+@Transactional
     public  List<User> index() {
         List<User> userList = new ArrayList<>();
         String sql = "SELECT * FROM user";
