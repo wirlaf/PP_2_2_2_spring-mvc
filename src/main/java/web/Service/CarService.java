@@ -2,9 +2,9 @@ package web.Service;
 
 import web.model.Car;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface CarService {
-    ArrayList<Car> returnCar();
-    ArrayList<Car> show(int num);
+    List<Car> returnCar();
+    List<Car> show(int num);
 }

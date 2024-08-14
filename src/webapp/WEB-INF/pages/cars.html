@@ -12,10 +12,10 @@
         <th>Model</th>
         <th>Year</th>
     </tr>
-    <tr th:each = "cars : ${cars}">
-        <td th:utext="${cars.getMake()}"></td>
-        <td th:utext="${cars.getModel()}"></td>
-        <td th:utext="${cars.getYear()}"></td>
+    <tr th:each = "car : ${cars}">
+        <td th:utext="${car.getMake()}"></td>
+        <td th:utext="${car.getModel()}"></td>
+        <td th:utext="${car.getYear()}"></td>
     </tr>
 </table>
 </body>

@@ -4,15 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.Service.CarService;
-import web.model.Car;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
+@RequestMapping("/cars")
 public class CarController {
 
     private final CarService carService;
@@ -22,15 +19,13 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping(value = "/cars")
-    public String printCars(ModelMap model) {
-        model.addAttribute("cars",carService.returnCar());
+    @GetMapping()
+    public String printCars(ModelMap model,@RequestParam(name = "count",required = false) Integer count) {
+        if (count != null) {
+            model.addAttribute("cars",carService.show(count));
+        }else {
+            model.addAttribute("cars", carService.returnCar());
+        }
         return "cars";
-    }
-    @GetMapping(value = "/cars?count={num}")
-    public String showCars(ModelMap model, @PathVariable("num") int num) {
-        ArrayList<Car> cars = carService.show(num);
-        model.addAttribute("cars",cars);
-        return "cars?count="+num;
     }
 }

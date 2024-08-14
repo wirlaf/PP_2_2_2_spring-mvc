@@ -4,11 +4,12 @@ import org.springframework.stereotype.Service;
 import web.model.Car;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class CarServiceImpl implements CarService {
-    ArrayList<Car> cars;
+    private final List<Car> cars;
     private static int year = 1990;
 
     {
@@ -21,11 +22,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public ArrayList<Car> returnCar() {
+    public List<Car> returnCar() {
         return cars;
     }
 
-    public ArrayList<Car> show(int num) {
-        return (ArrayList<Car>) cars.stream().limit(num).collect(Collectors.toList());
+    public List<Car> show(int num) {
+        return cars.stream().limit(num).collect(Collectors.toList());
     }
 }
