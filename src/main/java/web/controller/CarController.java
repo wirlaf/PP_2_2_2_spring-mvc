@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import web.Service.CarService;
 import web.model.Car;
 
@@ -26,10 +27,10 @@ public class CarController {
         model.addAttribute("cars",carService.returnCar());
         return "cars";
     }
-    @GetMapping(value = "//cars?count={num}")
+    @GetMapping(value = "/cars?count={num}")
     public String showCars(ModelMap model, @PathVariable("num") int num) {
         ArrayList<Car> cars = carService.show(num);
         model.addAttribute("cars",cars);
-        return "cars";
+        return "cars?count="+num;
     }
 }
