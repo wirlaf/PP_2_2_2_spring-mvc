@@ -21,12 +21,11 @@ public class CarServiceImpl implements CarService {
         cars.add(new Car("Rus", "Granta", ++year));
     }
 
-    @Override
-    public List<Car> returnCar() {
-        return cars;
-    }
-
-    public List<Car> show(int num) {
-        return cars.stream().limit(num).collect(Collectors.toList());
+    public List<Car> show(Integer num) {
+        if (num != null) {
+            return cars.stream().limit(num).collect(Collectors.toList());
+        }else {
+            return cars;
+        }
     }
 }
