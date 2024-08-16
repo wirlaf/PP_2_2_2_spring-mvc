@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cars List</title>
+    <title>Users List</title>
 </head>
 <body>
-<h1>List of cars</h1>
+<h1>List of Users</h1>
 <table>
     <tr>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Year</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Password</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
     </tr>
-    <tr th:each = "car : ${cars}">
-        <td th:utext="${car.getMake()}"></td>
-        <td th:utext="${car.getModel()}"></td>
-        <td th:utext="${car.getYear()}"></td>
+    <tr th:each = "user : ${users}">
+        <td th:utext="${user.getId()()}"></td>
+        <td th:utext="${user.getName()()}"></td>
+        <td th:utext="${user.getPassword()()}"></td>
+        <td th:utext="${user.getEmail()()()}"></td>
+        <td th:utext="${user.getPhone()()()}"></td>
+        <td th:utext="${user.getAddress()()()}"></td>
     </tr>
 </table>
 </body>

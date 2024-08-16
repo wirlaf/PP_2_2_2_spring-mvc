@@ -2,24 +2,68 @@ package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import web.Service.UserServiceImpl;
+import web.model.User;
+
 
 @Controller
-@RequestMapping("/cars")
 public class UserController {
-//    private final CarService carService;
-//
-//    @Autowired
-//    public CarController(CarService carService) {
-//        this.carService = carService;
+
+    private final UserServiceImpl userService;
+
+    @Autowired
+    public UserController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
+
+
+    //show
+    @GetMapping(value = "/users")
+    public String show(ModelMap model) {
+        model.addAttribute("users", userService.show());
+        return "/users";
+    }
+
+    @GetMapping(value = "/users/one")
+    public String showOne(ModelMap model, @RequestParam(name = "id") Integer id){
+        model.addAttribute("user",userService.showOne(id));
+        return "/showOne";
+    }
+
+    //CREATE
+    @GetMapping("/users/new")
+    public String newUser(ModelMap model) {
+        model.addAttribute("user", new User());
+        return "/new";
+    }
+
+    @PostMapping(value = "/users/create")
+    public String create(@ModelAttribute("user") User user) {
+        userService.create(user);
+        return "redirect:/users";
+    }
+    //update
+
+    @GetMapping(value = "/users/edit")
+    public String edit(Model model,@RequestParam(name = "id") Integer id) {
+        model.addAttribute("user",userService.showOne(id));
+        return "/edit";
+    }
+    @PostMapping(value = "/users/update")
+    public String update(@ModelAttribute("user") User user,@RequestParam(name = "id") Integer id) {
+        userService.update(user,id);
+        return "redirect:/users";
+    }
+
+    //delete
+//    @PostMapping
+//    public String delete(@RequestParam(name = "id") Integer id) {
+//        userService.delete(id);
+//        return "redirect:/users";
 //    }
-//
-//    @GetMapping()
-//    public String printCars(ModelMap model, @RequestParam(name = "count", required = false) Integer count) {
-//        model.addAttribute("cars", carService.show(count));
-//        return "cars";
-//    }
+
+
 }

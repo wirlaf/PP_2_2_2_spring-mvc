@@ -1,35 +1,46 @@
 package web.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import web.dao.UserDao;
-import web.dao.UserDaoImpl;
 import web.model.User;
 
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService {
-    UserDaoImpl userDao = new UserDaoImpl();
 
-    public void createUsersTable() {
-        userDao.createUsersTable();
+    UserDao userDao;
+
+    @Autowired
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
     }
 
-    public void dropUsersTable() {
-        userDao.dropUsersTable();
+    @Override
+    public void create(User user) {
+        userDao.create(user);
+        System.out.println("Service");
+        System.out.println(user);
     }
 
-    public void saveUser(String name, String lastName, byte age) {
-        userDao.saveUser(name,lastName,age);
+    @Override
+    public void update(User user, int id) {
+        userDao.update(user, id);
     }
 
-    public void removeUserById(long id) {
-        userDao.removeUserById(id);
+    @Override
+    public void delete(int id) {
+
     }
 
-    public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+    @Override
+    public User showOne(int id) {
+        return userDao.showOne(id);
     }
 
-    public void cleanUsersTable() {
-        userDao.cleanUsersTable();
+    @Override
+    public List<User> show() {
+        return userDao.show();
     }
 }
