@@ -20,8 +20,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void create(User user) {
         userDao.create(user);
-        System.out.println("Service");
-        System.out.println(user);
     }
 
     @Override
@@ -31,12 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(int id) {
-
-    }
-
-    @Override
-    public User showOne(int id) {
-        return userDao.showOne(id);
+        userDao.delete(id);
     }
 
     @Override

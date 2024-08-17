@@ -8,7 +8,6 @@ import java.util.List;
 public interface UserDao {
 
     List<User> show();
-    User showOne(Integer id);
     void create(User user);
 
     void update(User user,int id);

@@ -8,21 +8,97 @@
 <h1>List of Users</h1>
 <table>
     <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Password</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Address</th>
+        <th th:width="100" >Id</th>
+        <th th:width="100" >Name</th>
+        <th th:width="100" >Password</th>
+        <th th:width="100" >Email</th>
+        <th th:width="100" >Phone</th>
+        <th th:width="100" >Address</th>
     </tr>
     <tr th:each = "user : ${users}">
-        <td th:utext="${user.getId()()}"></td>
-        <td th:utext="${user.getName()()}"></td>
-        <td th:utext="${user.getPassword()()}"></td>
-        <td th:utext="${user.getEmail()()()}"></td>
-        <td th:utext="${user.getPhone()()()}"></td>
-        <td th:utext="${user.getAddress()()()}"></td>
+        <td th:width="100" th:utext="${user.getId()}"></td>
+        <td th:width="100" th:utext="${user.getName()}"></td>
+        <td th:width="100" th:utext="${user.getPassword()}"></td>
+        <td th:width="100" th:utext="${user.getEmail()}"></td>
+        <td th:width="100" th:utext="${user.getPhone()}"></td>
+        <td th:width="100" th:utext="${user.getAddress()}"></td>
     </tr>
 </table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>Add to User List</h2>
+<table>
+    <tr>
+        <th th:width="200">Enter name:</th>
+        <th th:width="180">Enter password:</th>
+        <th th:width="180">Enter email:</th>
+        <th th:width="180">Enter phone:</th>
+        <th th:width="180">Enter address:</th>
+    </tr>
+</table>
+<form th:method="POST" th:action="@{/users/create}" th:object="${user}">
+
+    <label for="name"></label>
+    <label for="password"></label>
+    <label for="email"></label>
+    <label for="phone"></label>
+    <label for="address"></label>
+    <input type="text" th:field="*{name}" id="name" />
+    <input type="text" th:field="*{password}" id="password" />
+    <input type="text" th:field="*{email}" id="email" />
+    <input type="text" th:field="*{phone}" id="phone" />
+    <input type="text" th:field="*{address}" id="address" />
+    <br>
+    <input type="submit" value="Create!" />
+</form>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>Update User</h2>
+<table>
+    <tr>
+        <th th:width="200">Enter ID:</th>
+        <th th:width="200">Enter name:</th>
+        <th th:width="180">Enter password:</th>
+        <th th:width="180">Enter email:</th>
+        <th th:width="180">Enter phone:</th>
+        <th th:width="180">Enter address:</th>
+    </tr>
+</table>
+<form th:method="POST" th:action="@{/users/update}" th:object="${user1}">
+    <label for="id1"></label>
+    <label for="name1"></label>
+    <label for="password1"></label>
+    <label for="email1"></label>
+    <label for="phone1"></label>
+    <label for="address1"></label>
+    <input type="text" th:field="*{id}" id="id1" />
+    <input type="text" th:field="*{name}" id="name1" />
+    <input type="text" th:field="*{password}" id="password1" />
+    <input type="text" th:field="*{email}" id="email1" />
+    <input type="text" th:field="*{phone}" id="phone1" />
+    <input type="text" th:field="*{address}" id="address1" />
+    <br>
+    <input type="submit" value="Update!" />
+</form>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>ID to Delete</h2>
+<form th:method="POST" th:action="@{/users/delete}" th:object="${user3}">
+    <label for="id3"></label>
+    <input type="text" th:field="*{id}" id="id3" />
+    <br>
+    <input type="submit" value="Delete!" />
+</form>
 </body>
+
 </html>

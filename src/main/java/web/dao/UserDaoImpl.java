@@ -12,39 +12,40 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao {
 
+    EntityManager entityManager;
+
     @Autowired
-    private EntityManagerFactory entityManagerFactory;
-
-
-
-
+    public UserDaoImpl(EntityManagerFactory entityManagerFactory) {
+        this.entityManager = entityManagerFactory.createEntityManager();
+    }
     @Override
     public void create(User user) {
-        System.out.println("DAO");
-        System.out.println(user);
-        entityManagerFactory.createEntityManager().persist(user);
+        entityManager.getTransaction().begin();
+        entityManager.persist(user);
+        entityManager.getTransaction().commit();
     }
-
-
 
     @Override
     public void update(User user, int id) {
         user.setId(id);
-        entityManagerFactory.createEntityManager().merge(user);
+        entityManager.getTransaction().begin();
+        entityManager.merge(user);
+        entityManager.getTransaction().commit();
     }
-
     @Override
     public void delete(int id) {
+        entityManager.getTransaction().begin();
+        if (entityManager.find(User.class, id) != null) {
+            entityManager.remove(entityManager.find(User.class, id));
+        }
+        entityManager.getTransaction().commit();
 
     }
 
     @Override
     public List<User> show() {
-        return entityManagerFactory.createEntityManager().createQuery("SELECT u FROM User u", User.class).getResultList();
+        return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
-    @Override
-    public User showOne(Integer id) {
-        return entityManagerFactory.createEntityManager().find(User.class, id);
-    }
+
 }
