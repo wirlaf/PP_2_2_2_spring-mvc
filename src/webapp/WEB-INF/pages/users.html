@@ -70,7 +70,7 @@
         <th th:width="180">Enter address:</th>
     </tr>
 </table>
-<form th:method="POST" th:action="@{/users/update}" th:object="${user1}">
+<form th:method="POST" th:action="@{/users/update}" th:object="${user}">
     <label for="id1"></label>
     <label for="name1"></label>
     <label for="password1"></label>
@@ -93,7 +93,7 @@
 <br>
 <br>
 <h2>ID to Delete</h2>
-<form th:method="POST" th:action="@{/users/delete}" th:object="${user3}">
+<form th:method="POST" th:action="@{/users/delete}" th:object="${user}">
     <label for="id3"></label>
     <input type="text" th:field="*{id}" id="id3" />
     <br>

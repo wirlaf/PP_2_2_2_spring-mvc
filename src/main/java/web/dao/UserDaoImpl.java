@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao {
 
-    EntityManager entityManager;
+    private  EntityManager entityManager;
 
     @Autowired
     public UserDaoImpl(EntityManagerFactory entityManagerFactory) {
