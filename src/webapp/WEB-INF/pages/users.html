@@ -93,9 +93,9 @@
 <br>
 <br>
 <h2>ID to Delete</h2>
-<form th:method="POST" th:action="@{/users/delete}" th:object="${user}">
-    <label for="id3"></label>
-    <input type="text" th:field="*{id}" id="id3" />
+<form th:method="POST" th:action="@{/users/delete}" >
+    <label for="idToDelete"></label>
+    <input type="text" th:name="id" id="idToDelete" />
     <br>
     <input type="submit" value="Delete!" />
 </form>
