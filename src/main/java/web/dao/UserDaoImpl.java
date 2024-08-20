@@ -6,39 +6,31 @@ import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
 @Repository
 public class UserDaoImpl implements UserDao {
-
+    @PersistenceContext
     private  EntityManager entityManager;
 
-    @Autowired
-    public UserDaoImpl(EntityManagerFactory entityManagerFactory) {
-        this.entityManager = entityManagerFactory.createEntityManager();
-    }
+
     @Override
     public void create(User user) {
-        entityManager.getTransaction().begin();
         entityManager.persist(user);
-        entityManager.getTransaction().commit();
     }
 
     @Override
     public void update(User user, int id) {
         user.setId(id);
-        entityManager.getTransaction().begin();
         entityManager.merge(user);
-        entityManager.getTransaction().commit();
     }
     @Override
     public void delete(int id) {
-        entityManager.getTransaction().begin();
         if (entityManager.find(User.class, id) != null) {
             entityManager.remove(entityManager.find(User.class, id));
         }
-        entityManager.getTransaction().commit();
 
     }
 
