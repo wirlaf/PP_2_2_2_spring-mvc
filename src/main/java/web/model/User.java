@@ -1,7 +1,9 @@
 package web.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "Users")
 public class User {
